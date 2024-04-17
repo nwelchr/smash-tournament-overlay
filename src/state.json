@@ -4,5 +4,8 @@
   "player1Tag": "",
   "player2Tag": "",
   "player1Char": "",
-  "player2Char": ""
+  "player2Char": "",
+  "round": "",
+  "roundNumber": "",
+  "bestOf": 3
 }

@@ -82,7 +82,7 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        #round {
+        #header {
             position: absolute;
             top: 10px;
             left: 10px;
@@ -96,13 +96,17 @@
             background: linear-gradient(to right, #3E1D66, #154C4F);
             border-radius: 50px;
             border: 1px solid #D8A528;
-            font-weight: 200;
-            font-size: 18px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
         }
     </style>
 </head>
 <body>
-    <div id="round">Round Info</div>
+    <div id="header">
+        <div id="round"></div>
+        <div id="bestOf"></div>
+    </div>
     <div id="scoreboard">
         <div id="p1" class="player">
             <div id="p1Score" class="score"></div>
@@ -130,6 +134,7 @@
                 const roundLabel = formatRound(data.round);
                 const roundDisplay = roundLabel + (data.roundNumber ? " " + data.roundNumber : "");
                 document.getElementById('round').textContent = roundDisplay;
+                document.getElementById('bestOf').textContent = "Best of " + data.bestOf;
             })
             .catch(error => console.error('Error fetching data:', error));
         }

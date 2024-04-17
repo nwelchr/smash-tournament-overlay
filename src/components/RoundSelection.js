@@ -14,7 +14,6 @@ function RoundSelection({
       borderColor: "rgba(31, 41, 55)",
       color: "white",
       boxShadow: "none",
-      width: "100%",
     }),
     menu: (provided) => ({
       ...provided,
@@ -28,6 +27,7 @@ function RoundSelection({
     input: (provided) => ({
       ...provided,
       color: "white",
+      width: "150px",
     }),
     option: (provided, state) => ({
       ...provided,
@@ -47,25 +47,45 @@ function RoundSelection({
   };
 
   return (
-    <div className="mt-8 flex w-1/2 items-center">
-      <Select
-        name="round"
-        options={roundOptions}
-        styles={customStyles}
-        className="w-3/4"
-        placeholder="Select Tournament Round"
-        value={roundOptions.find((option) => option.value === data.round)}
-        onChange={handleSelectChange}
-      />
-      <input
-        type="number"
-        name="roundNumber"
-        value={data.roundNumber}
-        onChange={handleInputChange}
-        placeholder="Round Number"
-        className="mt-2 ml-4 p-2 w-1/4 bg-transparent border-b-2 border-gray-300 outline-none"
-        disabled={!["winnersRound", "losersRound"].includes(data.round)}
-      />
+    <div className="flex w-full justify-center mt-8">
+      <div className="flex items-center gap-x-20">
+        <div className="flex items-center">
+          <Select
+            name="round"
+            options={roundOptions}
+            styles={customStyles}
+            className="w-full mr-4"
+            placeholder="Select Round"
+            value={roundOptions.find((option) => option.value === data.round)}
+            onChange={handleSelectChange}
+          />
+          <input
+            type="number"
+            name="roundNumber"
+            value={data.roundNumber}
+            onChange={handleInputChange}
+            placeholder="#"
+            className={`p-2 w-16 bg-transparent border-b-2 border-gray-300 outline-none ${
+              !["winnersRound", "losersRound"].includes(data.round)
+                ? "opacity-5"
+                : ""
+            }`}
+            disabled={!["winnersRound", "losersRound"].includes(data.round)}
+          />
+        </div>
+        <div className="flex items-center justify-center">
+          <label className="mr-4 text-white font-light">Best of:</label>
+          <input
+            type="number"
+            name="bestOf"
+            value={data.bestOf}
+            min={1}
+            step={2}
+            onChange={handleInputChange}
+            className="p-2 w-16 bg-transparent border-b-2 border-gray-300 outline-none"
+          />
+        </div>
+      </div>
     </div>
   );
 }

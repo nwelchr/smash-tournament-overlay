@@ -4,17 +4,20 @@ import RoundSelection from "./components/RoundSelection";
 import ControlButtons from "./components/ControlButtons";
 import "./App.css";
 
+const defaultState = {
+  player1Score: 0,
+  player2Score: 0,
+  player1Tag: "",
+  player2Tag: "",
+  player1Char: "",
+  player2Char: "",
+  round: "",
+  roundNumber: "",
+  bestOf: 3,
+};
+
 function App() {
-  const [data, setData] = useState({
-    player1Score: 0,
-    player2Score: 0,
-    player1Tag: "",
-    player2Tag: "",
-    player1Char: "",
-    player2Char: "",
-    round: "",
-    roundNumber: "",
-  });
+  const [data, setData] = useState(defaultState);
 
   const characterOptions = [
     { value: "Banjo & Kazooie", label: "Banjo & Kazooie" },
@@ -138,23 +141,13 @@ function App() {
   };
 
   const resetData = () => {
-    const resetData = {
-      player1Score: 0,
-      player2Score: 0,
-      player1Tag: "",
-      player2Tag: "",
-      player1Char: "",
-      player2Char: "",
-      round: "",
-      roundNumber: "",
-    };
-    setData(resetData);
+    setData(defaultState);
     fetch("/update-scores", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ scores: resetData }),
+      body: JSON.stringify({ scores: defaultState }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -164,17 +157,15 @@ function App() {
   };
 
   const swapPlayers = () => {
-    setData((prevData) => {
-      console.log({ prevData });
-      return {
-        player1Score: prevData.player2Score,
-        player2Score: prevData.player1Score,
-        player1Tag: prevData.player2Tag,
-        player2Tag: prevData.player1Tag,
-        player1Char: prevData.player2Char,
-        player2Char: prevData.player1Char,
-      };
-    });
+    setData((prevData) => ({
+      ...prevData,
+      player1Score: prevData.player2Score,
+      player2Score: prevData.player1Score,
+      player1Tag: prevData.player2Tag,
+      player2Tag: prevData.player1Tag,
+      player1Char: prevData.player2Char,
+      player2Char: prevData.player1Char,
+    }));
   };
 
   return (
