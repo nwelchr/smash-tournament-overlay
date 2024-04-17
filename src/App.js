@@ -119,6 +119,8 @@ function App() {
     { value: "losersFinals", label: "Losers Finals" },
     { value: "grandFinals", label: "Grand Finals" },
     { value: "trueFinals", label: "True Finals" },
+    { value: "thugFinals", label: "Thug Finals" },
+    { value: "friendlies", label: "Friendlies" },
   ];
 
   const handleInputChange = (e) => {

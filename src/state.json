@@ -5,7 +5,7 @@
   "player2Tag": "",
   "player1Char": "",
   "player2Char": "",
-  "round": "",
+  "round": "friendlies",
   "roundNumber": "",
-  "bestOf": 3
+  "bestOf": ""
 }
