@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ultimate Game Overlay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            background-color: transparent;
+            color: white;
+            font-family: "Roboto", sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #scoreboard {
+            width: 50%;
+            height: 50px;
+            background: linear-gradient(to right, #3E1D66, #154C4F);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+            border-radius: 50px;
+            border: 1px solid #D8A528;
+        }
+        .player {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            margin: 0 10px;
+        }
+        #p1 {
+            justify-content: flex-start;
+        }
+        #p2 {
+            justify-content: flex-end; 
+        }
+        .score, .char, .name {
+            width: 40px;
+            height: 40px;
+        }
+        .score {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+        }
+        .name {
+            font-size: 16px;
+            width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; 
+        }
+        #p2 .name {
+            justify-content: flex-end; 
+        }
+        .char {
+            margin: 0px 10px;
+        }
+        #logo {
+            width: 150px;
+            height: 150px;
+            position:absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #round {
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(to right, #3E1D66, #154C4F);
+            border-radius: 50px;
+            margin-bottom: 10px;
+            font-weight: 200;
+            font-size: 18px;
+            border: 1px solid #D8A528;
+        }
+    </style>
+</head>
+<body>
+    <div id="scoreboard">
+        <div id="p1" class="player">
+            <div id="p1Score" class="score"></div>
+            <img id="p1Char" class="char" src="">
+            <div id="p1Name" class="name"></div>
+        </div>
+        <img src="sunset_smash.png" id="logo">
+        <div id="p2" the class="player">
+            <div id="p2Name" class="name"></div>
+            <img id="p2Char" class="char" src="">
+            <div id="p2Score" class="score"></div>
+        </div>
+    </div>
+    <div id="round"></div>
+    <script>
+        function fetchData() {
+            fetch('/state')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('p1Score').textContent = data.player1Score;
+                document.getElementById('p2Score').textContent = data.player2Score;
+                document.getElementById('p1Name').textContent = data.player1Tag;
+                document.getElementById('p2Name').textContent = data.player2Tag;
+                document.getElementById('p1Char').src = data.player1Char;
+                document.getElementById('p2Char').src = data.player2Char;
+                document.getElementById('round').textContent = data.round;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Fetch data initially and then every second
+        fetchData();
+        setInterval(fetchData, 1000);
+    </script>
+</body>
+</html>
