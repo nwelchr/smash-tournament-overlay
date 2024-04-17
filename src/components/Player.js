@@ -11,30 +11,38 @@ function Player({
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      backgroundColor: "rgba(31, 41, 55)",
-      borderColor: "rgba(31, 41, 55)",
-      color: "white",
-      boxShadow: "none",
+      backgroundColor: "rgba(31, 41, 55)", // dark background
+      borderColor: "rgba(31, 41, 55)", // dark border
+      color: "white", // this sets the text color for the control but not the input text
+      boxShadow: "none", // removes box shadow
     }),
     menu: (provided) => ({
       ...provided,
-      backgroundColor: "rgba(31, 41, 55)",
-      color: "white",
+      backgroundColor: "rgba(31, 41, 55)", // dark background for options
+      color: "white", // sets text color for options
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: "white",
+      color: "white", // text color of the selected item
+    }),
+    input: (provided) => ({
+      ...provided,
+      color: "white", // ensures the text color you type is white
     }),
     option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isSelected
-        ? "rgba(55, 65, 81)"
-        : "rgba(31, 41, 55)",
-      color: "white",
+        ? "rgba(55, 65, 81)" // darker for selected option
+        : "rgba(31, 41, 55)", // dark for other options
+      color: "white", // text color for all options
       cursor: "pointer",
       ":hover": {
-        backgroundColor: "rgba(55, 65, 81)",
+        backgroundColor: "rgba(55, 65, 81)", // darker on hover
       },
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: "white", // ensures the placeholder text is also white
     }),
   };
 
@@ -42,31 +50,23 @@ function Player({
     <div className="bg-gray-950 bg-opacity-50 p-12 rounded-md space-y-4">
       <h2
         className={`text-3xl font-light ${
-          player === "player1" ? "text-purple-300" : "text-cyan-300"
+          player === "player1" ? "text-purple-700" : "text-cyan-700"
         }`}
       >
         {player === "player1" ? "Player 1" : "Player 2"}
       </h2>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center justify-center">
         <button
-          className={`bg-${
-            player === "player1" ? "purple" : "cyan"
-          }-700 hover:bg-${
-            player === "player1" ? "purple" : "cyan"
-          }-800 text-white font-bold py-2 px-4 rounded-full`}
+          className={`bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full`}
           onClick={() => handleScoreChange(`${player}Score`, -1)}
         >
           –
         </button>
-        <div className="text-white font-bold text-2xl w-12 text-center">
+        <div className="text-white font-light text-6xl w-12 text-center">
           {data[`${player}Score`]}
         </div>
         <button
-          className={`bg-${
-            player === "player1" ? "purple" : "cyan"
-          }-700 hover:bg-${
-            player === "player1" ? "purple" : "cyan"
-          }-800 text-white font-bold py-2 px-4 rounded-full`}
+          className={`bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full`}
           onClick={() => handleScoreChange(`${player}Score`, 1)}
         >
           +
@@ -78,7 +78,7 @@ function Player({
         value={data[`${player}Tag`]}
         onChange={handleInputChange}
         placeholder="Player Tag"
-        className="w-full text-center bg-transparent border-b-2 border-gray-300 outline-none"
+        className="w-full text-center bg-transparent border-b-2 border-gray-800 outline-none"
       />
       <Select
         name={`${player}Char`}

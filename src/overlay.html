@@ -15,8 +15,6 @@
             background-color: transparent;
             color: white;
             font-family: "Roboto", sans-serif;
-            font-style: normal;
-            font-weight: 300;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -79,38 +77,45 @@
         #logo {
             width: 150px;
             height: 150px;
-            position:absolute;
+            position: absolute;
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
         }
         #round {
-            text-align: center;
+            position: absolute;
+            top: 10px;
+            left: 10px;
             padding: 10px;
+            width: 200px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             background: linear-gradient(to right, #3E1D66, #154C4F);
             border-radius: 50px;
-            margin-bottom: 10px;
+            border: 1px solid #D8A528;
             font-weight: 200;
             font-size: 18px;
-            border: 1px solid #D8A528;
         }
     </style>
 </head>
 <body>
+    <div id="round">Round Info</div>
     <div id="scoreboard">
         <div id="p1" class="player">
             <div id="p1Score" class="score"></div>
             <img id="p1Char" class="char" src="">
             <div id="p1Name" class="name"></div>
         </div>
-        <img src="sunset_smash.png" id="logo">
-        <div id="p2" the class="player">
+        <img src="/images/sunset_smash.png" id="logo">
+        <div id="p2" class="player">
             <div id="p2Name" class="name"></div>
             <img id="p2Char" class="char" src="">
-            <div id="p2Score" class="score"></div>
+            <div id="p2Score" the class="score"></div>
         </div>
     </div>
-    <div id="round"></div>
     <script>
         function fetchData() {
             fetch('/state')
@@ -120,14 +125,31 @@
                 document.getElementById('p2Score').textContent = data.player2Score;
                 document.getElementById('p1Name').textContent = data.player1Tag;
                 document.getElementById('p2Name').textContent = data.player2Tag;
-                document.getElementById('p1Char').src = data.player1Char;
-                document.getElementById('p2Char').src = data.player2Char;
-                document.getElementById('round').textContent = data.round;
+                document.getElementById('p1Char').src = `/images/stock_icons/${data.player1Char || "Random"}/${data.player1Char || "Random"} (1).png`;
+                document.getElementById('p2Char').src = `/images/stock_icons/${data.player2Char || "Random"}/${data.player2Char || "Random"} (1).png`;
+                const roundLabel = formatRound(data.round);
+                const roundDisplay = roundLabel + (data.roundNumber ? " " + data.roundNumber : "");
+                document.getElementById('round').textContent = roundDisplay;
             })
             .catch(error => console.error('Error fetching data:', error));
         }
-
-        // Fetch data initially and then every second
+    
+        function formatRound(roundValue) {
+            const rounds = {
+                winnersRound: 'Winners Round',
+                winnersQuarters: 'Winners Quarters',
+                winnersSemis: 'Winners Semis',
+                winnersFinals: 'Winners Finals',
+                losersRound: 'Losers Round',
+                losersQuarters: 'Losers Quarters',
+                losersSemis: 'Losers Semis',
+                losersFinals: 'Losers Finals',
+                grandFinals: 'Grand Finals',
+                trueFinals: 'True Finals'
+            };
+            return rounds[roundValue] || roundValue;
+        }
+    
         fetchData();
         setInterval(fetchData, 1000);
     </script>
