@@ -163,26 +163,48 @@ function App() {
       .catch((error) => console.error("Failed to update data:", error));
   };
 
+  const swapPlayers = () => {
+    setData((prevData) => {
+      console.log({ prevData });
+      return {
+        player1Score: prevData.player2Score,
+        player2Score: prevData.player1Score,
+        player1Tag: prevData.player2Tag,
+        player2Tag: prevData.player1Tag,
+        player1Char: prevData.player2Char,
+        player2Char: prevData.player1Char,
+      };
+    });
+  };
+
   return (
     <div className="App bg-gradient-to-r from-purple-950 to-cyan-950 min-h-screen flex flex-col items-center py-5 text-gray-200">
       <h1 className="text-4xl font-light m-8">Smash Ultimate Stream Overlay</h1>
-      <div className="flex w-full justify-center items-start gap-x-16">
-        {["player1", "player2"].map((player) => (
-          <Player
-            key={player}
-            player={player}
-            data={data}
-            handleInputChange={handleInputChange}
-            handleScoreChange={(player, delta) =>
-              setData((prev) => ({
-                ...prev,
-                [player]: Math.max(0, prev[player] + delta),
-              }))
-            }
-            characterOptions={characterOptions}
-          />
-        ))}
-      </div>
+      <section className="">
+        <button
+          onClick={swapPlayers}
+          className="text-2xl font-light hover:text-white"
+        >
+          Swap Players
+        </button>
+        <div className="flex w-full justify-center items-start gap-x-16">
+          {["player1", "player2"].map((player) => (
+            <Player
+              key={player}
+              player={player}
+              data={data}
+              handleInputChange={handleInputChange}
+              handleScoreChange={(player, delta) =>
+                setData((prev) => ({
+                  ...prev,
+                  [player]: Math.max(0, prev[player] + delta),
+                }))
+              }
+              characterOptions={characterOptions}
+            />
+          ))}
+        </div>
+      </section>
       <RoundSelection
         data={data}
         handleInputChange={handleInputChange}

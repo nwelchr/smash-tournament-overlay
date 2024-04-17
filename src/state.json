@@ -1,10 +1,8 @@
 {
-  "player1Score": 2,
-  "player2Score": 2,
-  "player1Tag": "falafeless",
-  "player2Tag": "ena",
-  "player1Char": "luigi",
-  "player2Char": "",
-  "round": "winnersFinals",
-  "roundNumber": ""
+  "player1Score": 0,
+  "player2Score": 0,
+  "player1Tag": "",
+  "player2Tag": "",
+  "player1Char": "",
+  "player2Char": ""
 }
