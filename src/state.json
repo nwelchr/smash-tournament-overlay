@@ -1,11 +1,11 @@
 {
   "player1Score": 0,
-  "player2Score": 0,
-  "player1Tag": "",
-  "player2Tag": "",
-  "player1Char": "",
-  "player2Char": "",
-  "round": "friendlies",
-  "roundNumber": "",
-  "bestOf": ""
+  "player2Score": 1,
+  "player1Tag": "falafeless",
+  "player2Tag": "ena",
+  "player1Char": "Wario",
+  "player2Char": "Pikachu",
+  "round": "winnersRound",
+  "roundNumber": "2",
+  "bestOf": 3
 }
