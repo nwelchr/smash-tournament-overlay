@@ -4,10 +4,12 @@ Welcome to the Smash Ultimate Overlay tool! This tool provides a dashboard for m
 
 ## Previews
 Dashboard:
-<img width="843" alt="image" src="https://github.com/nwelchr/smash-tournament-overlay/assets/33099122/10c2e393-60d7-4a26-b52f-939d692af097">
+
+<img width="905" alt="image" src="https://github.com/nwelchr/smash-tournament-overlay/assets/33099122/12c29f0f-7e3d-41d2-a6fd-43be06dde8ec">
 
 Overlay:
-<img width="905" alt="image" src="https://github.com/nwelchr/smash-tournament-overlay/assets/33099122/12c29f0f-7e3d-41d2-a6fd-43be06dde8ec">
+
+<img width="843" alt="image" src="https://github.com/nwelchr/smash-tournament-overlay/assets/33099122/10c2e393-60d7-4a26-b52f-939d692af097">
 
 ## Features
 
